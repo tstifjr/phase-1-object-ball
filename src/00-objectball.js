@@ -60,7 +60,7 @@ function gameObject() {
         teamName: "Charlotte Hornets",
         colors: ["Turquoise" , "Purple"],
         players:{
-        "Jeff Adrian": {
+        "Jeff Adrien": {
             "number": 4,
             "shoe": 18,
             "points": 10,
@@ -128,10 +128,11 @@ function homeTeamName (){
 
 //console.log(homeTeamName());
 
-function numPointsScored (playersName) {
+function numPointsScored (playersName, place) {
     //console.log("hello");
-    let playerName = "Alan Anderson";
-    return gameObject().home.players[playerName].points;
+    //let playerName = "Alan Anderson";
+    return gameObject()[place].players[playersName].points;
 }
 
-console.log(numPointsScored('Alan Anderson'));
+console.log(numPointsScored('Jeff Adrien', 'away'));
+console.log(numPointsScored("Brook Lopez", "home"));
