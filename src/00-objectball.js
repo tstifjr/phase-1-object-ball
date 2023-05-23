@@ -117,4 +117,21 @@ function gameObject() {
     
     return object;
 }
-console.log(gameObject());
+//console.log(gameObject());
+
+//------Step 2: Functions
+
+function homeTeamName (){
+    const object = gameObject();
+    return object.home.teamName;
+}
+
+//console.log(homeTeamName());
+
+function numPointsScored (playersName) {
+    //console.log("hello");
+    let playerName = "Alan Anderson";
+    return gameObject().home.players[playerName].points;
+}
+
+console.log(numPointsScored('Alan Anderson'));
