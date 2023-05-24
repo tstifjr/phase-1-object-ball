@@ -126,14 +126,126 @@ function homeTeamName (){
     return object.home.teamName;
 }
 
-//console.log(homeTeamName());
 
-function numPointsScored (playersName, place) {
-    //console.log("hello");
-    //let playerName = "Alan Anderson";
-    return gameObject()[place].players[playersName].points;
+function numPointsScored (playersName){
+   //nested for loops iterate of keys successively to match playername and return points
+   const gameStats = gameObject(); 
+   for (let key in gameStats){ 
+        for (let teamKey in gameStats[key]){
+           if (teamKey === "players")
+           {
+            for (let playerKey in gameStats[key][teamKey])
+            {
+                if (playerKey === playersName){
+                    return gameStats[key][teamKey][playerKey].points;
+                }
+            }
+           
+           }
+        }
+    }
+    return "not a player"
 }
 
-console.log(numPointsScored('Jeff Adrien', 'away'));
-console.log(numPointsScored("Brook Lopez", "home"));
-//re-push
+function shoeSize (playersName){
+    const gameStats = gameObject();
+     
+    //nested for loops iterate of keys successively to match playername and return points
+     for (let key in gameStats){ 
+         for (let teamKey in gameStats[key]){
+            if (teamKey === "players")
+            {
+             for (let playerKey in gameStats[key][teamKey])
+             {
+                 if (playerKey === playersName){
+                     return gameStats[key][teamKey][playerKey].shoe;
+                 }
+             }
+            
+            }
+         }
+     }
+     return "not a player"
+ }
+
+ function teamColors (teamName){
+    const gameStats = gameObject();
+    for (let key in gameStats){
+        for (let teamKey in gameStats[key]){
+           //console.log(gameStats[key][teamKey]);
+            if (gameStats[key][teamKey] === teamName){
+                console.log(teamKey);
+                return gameStats[key].colors;
+            }
+        }
+    }
+ }
+
+ function teamNames (){
+    const gameStats = gameObject();
+    const aTeamNames = [];
+    for (let key in gameStats){
+        aTeamNames.push(gameStats[key].teamName)
+    }
+    return aTeamNames;
+ }
+
+ function playerNumbers (teamName){
+    const gameStats = gameObject();
+    const allNumbers = [];
+    for (let key in gameStats){
+       for (let teamKey in gameStats[key]){
+        if (gameStats[key][teamKey] === teamName){
+            
+            const playerStats = Object.values(gameStats[key].players);
+            
+            for (element of playerStats){
+                allNumbers.push(element.number);
+            }
+            }
+        }
+    }
+    return allNumbers;
+ }
+
+
+ function playerStats(playersName){
+
+    //if the playersName key = playerName return value of playersName key
+
+    const gameStats = gameObject(); 
+    for (let key in gameStats){ 
+         for (let teamKey in gameStats[key]){
+            if (teamKey === "players")
+            {
+             for (let playerKey in gameStats[key][teamKey])
+             {
+                 if (playerKey === playersName){
+                     return gameStats[key][teamKey][playerKey];
+                 }
+             }
+            
+            }
+         }
+     }
+     return "not a player"
+ }
+
+ function bigShoeRebounds(){
+    const gameStats = gameObject();
+    let maxShoe = 0;
+    let bigShoePlayer = "";
+    let playerBoards = 0;
+    for (let key in gameStats){
+       
+        const playerStats = Object.entries(gameStats[key].players);
+        for (let player of playerStats){
+            if(player[1].shoe > maxShoe){
+                maxShoe = player[1].shoe;
+                playerBoards = player[1].rebounds;
+            }
+
+        }
+    }
+    return playerBoards;
+ }
